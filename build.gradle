@@ -10,7 +10,6 @@ dependencies {
 
 test {
    useTestNG() {
-     listeners << 'com.ensimtest.listners.TestCaseRunmode'
 	 listeners << 'org.testng.reporters.XMLReporter'
    }
  }	
