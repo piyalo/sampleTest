@@ -2,12 +2,16 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="SampleTests">
 
-  <test verbose="2" name="SampleTests">
+  <test verbose="1" name="SampleTests1">
     <classes>
-      <class name="test.SampleTest"/>
+      <class name="test.SampleTestJSP"/>
     </classes>
   </test>
   
-  
+  <test verbose="2" name="SampleTests2">
+    <classes>
+      <class name="test.SampleTestServlet"/>
+    </classes>
+  </test>
   
 </suite> 
