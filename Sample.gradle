@@ -1,0 +1,15 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+
+dependencies {
+	compile fileTree(dir: 'resources/syslib')
+	compile fileTree(dir: 'resources/thirdparty', include: '*.jar')
+	}
+
+test {
+   useTestNG() {
+	 listeners << 'org.testng.reporters.XMLReporter'
+	 options.suites("resources/testprop/Sample.xml")
+   }
+ }

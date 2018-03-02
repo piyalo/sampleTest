@@ -1,0 +1,16 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+
+dependencies {
+	compile fileTree(dir: 'resources/syslib')
+	compile fileTree(dir: 'resources/thirdparty', include: '*.jar')
+	}
+
+test {
+   useTestNG() {
+     listeners << 'com.ensimtest.listners.TestCaseRunmode'
+	 listeners << 'org.testng.reporters.XMLReporter'
+   }
+ }	
