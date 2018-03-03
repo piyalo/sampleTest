@@ -28,7 +28,7 @@ public class SampleTestJSP
 		browser =new ChromeDriver(); /*intializing the chrome driver object, Web driver is not a class , it is ainterface of selenium*/
 		action=new Actions(browser);
 		browser.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        browser.get("http://10.11.17.3:8080/sample/");	
+        browser.get("http://localhost:8080/sample/");	
 	}
 
 	@AfterMethod
