@@ -1,8 +1,10 @@
 package com.test;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -15,30 +17,30 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.resource.PropertyReader;
 
 public class SampleTestServlet 
 {
 
 	WebDriver browser = null;
 	Actions action = null;
-	PropertyReader pr;
-	private static String baseURL;
+	String baseURL;
 	
 	@BeforeMethod
-	public void setUp()
+	public void setUp() throws IOException
 	{
 		Path pathOfWebDriver = Paths.get("resources/thirdparty/chromedriver.exe");
 		System.setProperty("webdriver.chrome.driver", pathOfWebDriver.toAbsolutePath().toString()); /*setting chrome driver location*/
-		try 
-		{
-			baseURL = pr.getURL();
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
 		
+		Path pathOfPropFile = Paths.get("resources/testprop/framework.properties");
+		String propertyFile= pathOfPropFile.toAbsolutePath().toString(); 
+		Properties prop = null;
+		FileInputStream fis;
+		System.out.println("propertyfilepath"+propertyFile);
+		prop=new Properties();
+		fis=new FileInputStream(propertyFile);
+		prop.load(fis);
+		
+		baseURL = prop.getProperty("URL").trim();
 		browser =new ChromeDriver(); /*intializing the chrome driver object, Web driver is not a class , it is ainterface of selenium*/
 		action=new Actions(browser);
 		browser.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
