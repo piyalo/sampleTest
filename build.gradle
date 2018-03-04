@@ -12,4 +12,14 @@ test {
    useTestNG() {
 	 listeners << 'org.testng.reporters.XMLReporter'
    }
- }	
+   
+task setURL << {
+ 	println myUrl
+ 	Properties props = new Properties()
+ 	File propsFile = new File('./resources/testprop/framework.properties')
+ 	props.load(propsFile.newDataInputStream())
+ 	props.setProperty('URL', myUrl)
+	props.store(propsFile.newWriter(), null)
+ }
+ 
+}	

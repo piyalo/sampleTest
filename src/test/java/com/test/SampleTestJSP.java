@@ -1,5 +1,6 @@
 package com.test;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
@@ -14,21 +15,33 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.resource.PropertyReader;
+
 public class SampleTestJSP 
 {
 	WebDriver browser = null;
 	Actions action = null;
-	
+	PropertyReader pr;
+	private static String baseURL;
+
 	@BeforeMethod
 	public void setUp()
 	{
 		Path pathOfWebDriver = Paths.get("resources/thirdparty/chromedriver.exe");
 		System.setProperty("webdriver.chrome.driver", pathOfWebDriver.toAbsolutePath().toString()); /*setting chrome driver location*/
+		try 
+		{
+			baseURL = pr.getURL();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
 		
 		browser =new ChromeDriver(); /*intializing the chrome driver object, Web driver is not a class , it is ainterface of selenium*/
 		action=new Actions(browser);
 		browser.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        browser.get("http://localhost:8080/sample/");	
+        browser.get(baseURL);	
 	}
 
 	@AfterMethod
